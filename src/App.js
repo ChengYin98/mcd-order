@@ -38,7 +38,7 @@ const App = () => {
     setBots([
       ...bots,
       {
-        code: botCounts.current,
+        botCode: botCounts.current,
         isAvailable: true,
         processingTime: undefined
       }
@@ -101,7 +101,7 @@ const App = () => {
         );
         setBots((prevBots) =>
           prevBots.map((prevBot) =>
-            prevBot.id === bot.id
+            prevBot.botCode === bot.botCode
               ? {
                 ...prevBot,
                 isAvailable: true,
@@ -206,10 +206,10 @@ const App = () => {
                   {bots.map((bot, idx) => (
                     bot.isAvailable ?
                       <div key={idx}>
-                        Bot {bot.code} was IDLE
+                        Bot {bot.botCode} was IDLE
                       </div>
                       : <div key={idx}>
-                        Bot {bot.code} Processing On {bot.orderCode} (Remain Time : {bot.processingTime}ms)
+                        Bot {bot.botCode} Processing On {bot.orderCode} (Remain Time : {bot.processingTime}ms)
                       </div>
                   ))}
                 </CardBody>
