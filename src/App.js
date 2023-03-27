@@ -23,6 +23,7 @@ const App = () => {
       let vipIndex = orders.findIndex(o => o.vip === false);
       if (vipIndex >= 0) {
         newOrderArray.splice(vipIndex, 0, order);
+        setOrders([...newOrderArray]);
       } else {
         setOrders(prevOrders => [...prevOrders, order]);
       }
