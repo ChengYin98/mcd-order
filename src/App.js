@@ -24,12 +24,11 @@ const App = () => {
       if (vipIndex >= 0) {
         newOrderArray.splice(vipIndex, 0, order);
       } else {
-        newOrderArray.push(order);
+        setOrders(prevOrders => [...prevOrders, order]);
       }
     } else {
-      newOrderArray.push(order);
+      setOrders(prevOrders => [...prevOrders, order]);
     }
-    setOrders([...newOrderArray])
 
     console.log(`Order ${order.orderCode} (${orderType}) added to queue`);
   }
@@ -63,11 +62,12 @@ const App = () => {
     const newBotArray = [...bots];
 
     for (let order of pendingOrders) {
-      for (let bot of newBotArray) {
+      for (let [idx, bot] of newBotArray.entries()) {
         if (bot.isAvailable) {
           bot.isAvailable = false;
           bot.orderCode = order.orderCode;
           bot.processingTime = processingTimeMS
+          newBotArray[idx] = bot
           break;
         }
       }
